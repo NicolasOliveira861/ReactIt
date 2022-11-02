@@ -1,8 +1,9 @@
-import functions from 'firebase-functions';
+import { https } from 'firebase-functions';
 import { initialize } from './database/index';
 initialize();
 
 import express from 'express';
+import { routes } from 'routes';
 
 // import cors from 'cors';
 // import dotenv from 'dotenv';
@@ -12,11 +13,9 @@ import express from 'express';
 const app = express();
 app.use(express.json());
 
-app.get('/test', (req, res) => {
-  res.send('Hello World!');
-});
+app.use(routes);
 
-const expressApi = functions.https.onRequest(app);
+const expressApi = https.onRequest(app);
 
 export { expressApi };
 
