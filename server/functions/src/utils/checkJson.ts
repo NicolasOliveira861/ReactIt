@@ -17,3 +17,7 @@ export const userValidators = [
   'is_admin',
   'language',
 ];
+
+export const postValidators = ['user_id', 'title', 'content', 'language'];
+
+export const commentValidators = ['user_id', 'content'];

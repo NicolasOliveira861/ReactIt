@@ -1,11 +1,6 @@
 import UsersRepository from 'app/repositories/UsersRepository';
-import { Request, response, Response } from 'express';
-import {
-  ICreateUsers,
-  IDeleteUsers,
-  IUpdateUsers,
-  IUsers,
-} from 'typings/IUsers';
+import { Request, Response } from 'express';
+import { ICreateUsers, IUpdateUsers } from 'typings/IUsers';
 import { userValidators, validateJsonFields } from 'utils/checkJson';
 
 const usersRepo = new UsersRepository();

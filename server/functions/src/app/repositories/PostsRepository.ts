@@ -1,10 +1,10 @@
-import { UsersCollection } from 'database/collections';
-import { ICreateUsers, IDeleteUsers, IUpdateUsers } from 'typings/IUsers';
+import { PostsCollection } from 'database/collections';
+import { ICreatePost, IDeletePost, IUpdatePost } from 'typings/IPosts';
 import { v4 } from 'uuid';
 
 export default class UsersRepository {
   async findAll() {
-    const snapshot = await UsersCollection.get();
+    const snapshot = await PostsCollection.get();
     const response: FirebaseFirestore.DocumentData[] = [];
 
     snapshot.forEach((doc) => response.push({ id: doc.id, ...doc.data() }));
@@ -13,7 +13,7 @@ export default class UsersRepository {
   }
 
   async findById(id: string) {
-    const snapshot = await UsersCollection.where('id', '==', id).get();
+    const snapshot = await PostsCollection.where('id', '==', id).get();
     const response: FirebaseFirestore.DocumentData[] = [];
 
     if (snapshot.empty) return response;
@@ -23,23 +23,8 @@ export default class UsersRepository {
     return response;
   }
 
-  async findByUsername(username: string) {
-    const snapshot = await UsersCollection.where(
-      'username',
-      '==',
-      username
-    ).get();
-    const response: FirebaseFirestore.DocumentData[] = [];
-
-    if (snapshot.empty) return response;
-
-    snapshot.forEach((doc) => response.push({ id: doc.id, ...doc.data() }));
-
-    return response;
-  }
-
-  async findByEmail(email: string) {
-    const snapshot = await UsersCollection.where('email', '==', email).get();
+  async findByUserId(userId: string) {
+    const snapshot = await PostsCollection.where('user_id', '==', userId).get();
     const response: FirebaseFirestore.DocumentData[] = [];
 
     if (snapshot.empty) return response;
@@ -50,7 +35,7 @@ export default class UsersRepository {
   }
 
   async findByLanguage(language: string) {
-    const snapshot = await UsersCollection.where(
+    const snapshot = await PostsCollection.where(
       'language',
       '==',
       language
@@ -64,25 +49,25 @@ export default class UsersRepository {
     return response;
   }
 
-  async create({ ...user }: ICreateUsers) {
-    const userId = v4();
+  async create({ ...post }: ICreatePost) {
+    const postId = v4();
 
-    await UsersCollection.doc(userId).set({ ...user });
+    await PostsCollection.doc(postId).set({ ...post });
 
     return {
-      userId,
-      ...user,
+      postId,
+      ...post,
     };
   }
 
-  async delete({ id }: IDeleteUsers) {
-    const deleteOperation = await UsersCollection.doc(id).delete();
+  async delete({ id }: IDeletePost) {
+    const deleteOperation = await PostsCollection.doc(id).delete();
 
     return deleteOperation;
   }
 
-  async update(id: string, { ...data }: IUpdateUsers) {
-    await UsersCollection.doc(id).update({
+  async update(id: string, { ...data }: IUpdatePost) {
+    await PostsCollection.doc(id).update({
       ...data,
     });
 
