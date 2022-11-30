@@ -1,9 +1,9 @@
-import { CommentsCollection } from 'database/collections';
+import { CommentsCollection } from '../../database/collections';
 import {
   ICreateComment,
   IDeleteComment,
   IUpdateComment,
-} from 'typings/IComments';
+} from '../../typings/IComments';
 import { v4 } from 'uuid';
 
 export default class CommentsRepository {

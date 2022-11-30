@@ -1,5 +1,5 @@
-import { PostsCollection } from 'database/collections';
-import { ICreatePost, IDeletePost, IUpdatePost } from 'typings/IPosts';
+import { PostsCollection } from '../../database/collections';
+import { ICreatePost, IDeletePost, IUpdatePost } from '../../typings/IPosts';
 import { v4 } from 'uuid';
 
 export default class UsersRepository {

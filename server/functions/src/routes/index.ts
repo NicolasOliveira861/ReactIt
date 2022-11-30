@@ -1,6 +1,6 @@
-import PostController from 'app/controllers/PostController';
-import UserController from 'app/controllers/UserController';
-import CommentController from 'app/controllers/CommentController';
+import UserController from '../app/controllers/UserController';
+import PostController from '../app/controllers/PostController';
+import CommentController from '../app/controllers/CommentController';
 import { Router } from 'express';
 
 const routes = Router();
@@ -32,4 +32,4 @@ routes.post('/comments', Comment.store);
 routes.patch('/comments/:id', Comment.update);
 routes.delete('/comments/:id', Comment.delete);
 
-export { routes };
+export default routes;

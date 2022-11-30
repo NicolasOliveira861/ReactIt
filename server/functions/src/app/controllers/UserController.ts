@@ -1,7 +1,7 @@
-import UsersRepository from 'app/repositories/UsersRepository';
+import UsersRepository from '../repositories/UsersRepository';
 import { Request, Response } from 'express';
-import { ICreateUsers, IUpdateUsers } from 'typings/IUsers';
-import { userValidators, validateJsonFields } from 'utils/checkJson';
+import { ICreateUsers, IUpdateUsers } from '../../typings/IUsers';
+import { userValidators, validateJsonFields } from '../../utils/checkJson';
 
 const usersRepo = new UsersRepository();
 
@@ -17,8 +17,7 @@ export default class UserController {
 
     const user = await usersRepo.findById(id);
 
-    if (user.length === 0)
-      return res.status(404).json({ error: 'User not found!' });
+    if (!user) return res.status(404).json({ error: 'User not found!' });
 
     return res.status(200).json(user);
   }
@@ -60,8 +59,7 @@ export default class UserController {
 
     const userExists = await usersRepo.findById(id);
 
-    if (userExists.length === 0)
-      return res.status(404).json({ error: 'User not found!' });
+    if (!userExists) return res.status(404).json({ error: 'User not found!' });
 
     //--- Email Validation ---//
 

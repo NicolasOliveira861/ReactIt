@@ -1,7 +1,7 @@
-import CommentsRepository from 'app/repositories/CommentsRepository';
+import CommentsRepository from '../repositories/CommentsRepository';
 import { Request, Response } from 'express';
-import { ICreateComment, IUpdateComment } from 'typings/IComments';
-import { commentValidators, validateJsonFields } from 'utils/checkJson';
+import { ICreateComment, IUpdateComment } from '../../typings/IComments';
+import { commentValidators, validateJsonFields } from '../../utils/checkJson';
 
 const commentsRepo = new CommentsRepository();
 

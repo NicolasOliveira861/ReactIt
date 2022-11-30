@@ -8,7 +8,6 @@ export const validateJsonFields = (obj: Object, validators: string[]) => {
 };
 
 export const userValidators = [
-  'id',
   'name',
   'username',
   'email',

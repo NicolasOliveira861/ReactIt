@@ -1,5 +1,5 @@
-import { UsersCollection } from 'database/collections';
-import { ICreateUsers, IDeleteUsers, IUpdateUsers } from 'typings/IUsers';
+import { UsersCollection } from '../../database/collections';
+import { ICreateUsers, IDeleteUsers, IUpdateUsers } from '../../typings/IUsers';
 import { v4 } from 'uuid';
 
 export default class UsersRepository {
@@ -13,14 +13,11 @@ export default class UsersRepository {
   }
 
   async findById(id: string) {
-    const snapshot = await UsersCollection.where('id', '==', id).get();
-    const response: FirebaseFirestore.DocumentData[] = [];
+    const snapshot = await UsersCollection.doc(id).get();
 
-    if (snapshot.empty) return response;
+    if (!snapshot.exists) return null;
 
-    snapshot.forEach((doc) => response.push({ id: doc.id, ...doc.data() }));
-
-    return response;
+    return { id: snapshot.id, ...snapshot.data() };
   }
 
   async findByUsername(username: string) {

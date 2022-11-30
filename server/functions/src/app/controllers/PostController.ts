@@ -1,7 +1,7 @@
-import PostsRepository from 'app/repositories/PostsRepository';
+import PostsRepository from '../repositories/PostsRepository';
 import { Request, Response } from 'express';
-import { ICreatePost, IUpdatePost } from 'typings/IPosts';
-import { postValidators, validateJsonFields } from 'utils/checkJson';
+import { ICreatePost, IUpdatePost } from '../../typings/IPosts';
+import { postValidators, validateJsonFields } from '../../utils/checkJson';
 
 const postsRepo = new PostsRepository();
 
